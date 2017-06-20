@@ -3,7 +3,7 @@ class PdfController {
     private $tmp_path;
 
     public function __construct() {
-        $this->tmp_path = __DIR__ . "/tmp/";
+        $this->tmp_path = "/tmp/";
     }
 
     private function getTempPath() {
@@ -12,13 +12,6 @@ class PdfController {
 
     private function createTempFile($type) {
         return tempnam($this->getTempPath(), $type . "_") . "." . $type;
-    }
-
-    /**
-     */
-    public function test() {
-        $text = \Spatie\PdfToText\Pdf::getText('pdfs/iso.pdf', '/usr/local/bin/pdftotext');
-        return $text;
     }
 
     /**
@@ -35,7 +28,7 @@ class PdfController {
 
         $text = null;
         try {
-            $text = \Spatie\PdfToText\Pdf::getText($tempfile, '/usr/local/bin/pdftotext');
+            $text = \Spatie\PdfToText\Pdf::getText($tempfile, '/usr/bin/pdftotext');
         } catch (Exception $e) {
             $this->returnError($e->getMessage());
         }
