@@ -16,6 +16,13 @@ class PdfController {
 
     /**
      */
+    public function test() {
+        $text = \Spatie\PdfToText\Pdf::getText('pdfs/iso.pdf', '/usr/local/bin/pdftotext');
+        return $text;
+    }
+
+    /**
+     */
     public function processPDF($url = null) {
         $url = urldecode($url);
 
@@ -57,6 +64,11 @@ class PdfController {
     }
 
     public function process($data) {
+    	if (empty($data)) {
+    		echo "Relevanssi attachment handling services is up and running.";
+    		exit();
+    	}
+    
         if (!isset($data['key'])) {
             $this->returnError("Key is missing.");
         }
