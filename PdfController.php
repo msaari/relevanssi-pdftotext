@@ -25,6 +25,10 @@ class PdfController {
 
         $tempfile = $this->createTempFile("pdf");
         file_put_contents($tempfile, fopen($url, 'r'));
+        
+        if (filesize($tempfile) == 0) {
+        	$this->returnError("Empty PDF file. Is the file publicly available?");
+        }
 
         $text = null;
         try {
